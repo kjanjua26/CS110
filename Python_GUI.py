@@ -1,6 +1,24 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import scrolledtext
+from tkinter import Menu
+
+root = tk.Tk()
+
+def _quit():
+    root.quit()
+    root.destroy()
+    exit()
+
+menuBar = Menu(root)
+root.configure(menu = menuBar)
+fileMenu = Menu(menuBar, tearoff=0)
+helpMenu = Menu(menuBar, tearoff=0)
+helpMenu.add_command(label='About')
+menuBar.add_cascade(label='File', menu=fileMenu)
+fileMenu.add_command(label="New")
+fileMenu.add_command(label='Exit', command=_quit)
+menuBar.add_cascade(label="Help", menu=helpMenu)
 
 COLOR1 = 'Blue'
 COLOR2 = 'Gold'
@@ -8,16 +26,6 @@ COLOR3 = 'Red'
 
 scrolW = 30
 scrolH = 3
-
-health = 50
-difficulty = input("Please input difficulty level: ")
-difficulty = int(difficulty)
-health_potion = random.randint(25, 50)
-health = health + health_potion
-health = int(health / difficulty)
-
-def game():
-    messagebox.showinfo("The Answer is: ", health)
 
 def radCall():
     radSel = radVar.get()
@@ -28,7 +36,6 @@ def radCall():
 def clickMe():
     action.configure(text="Hello" + ' ' + name.get() + ' ' +  ' ' + numberChosen.get())
 
-root = tk.Tk()
 
 scr = scrolledtext.ScrolledText(root, width=scrolW, height=scrolH, wrap=tk.WORD)
 scr.grid(column=0, columnspan=3, row=7)
